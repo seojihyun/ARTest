@@ -35,7 +35,7 @@ public class Json extends DataHandler {
             // 트위터
             if(root.has("results"))
                 dataArray = root.getJSONArray("results");
-                // 위키피디아
+                // 위키피디아 & 파인애플
             else if (root.has("geonames"))
                 dataArray = root.getJSONArray("geonames");
                 // 구글 버즈
@@ -61,6 +61,7 @@ public class Json extends DataHandler {
                         //case BUZZ: ma = processBuzzJSONObject(jo); break;
                         //case TWITTER: ma = processTwitterJSONObject(jo); break;
                         case WIKIPEDIA: ma = processWikipediaJSONObject(jo); break;
+                        case PINEAPPLE: ma = processPineappleJSONObject(jo); break;
                        // default: ma = processMixareJSONObject(jo); break;
                     }
                     // 마커 추가
@@ -75,6 +76,27 @@ public class Json extends DataHandler {
 
         // 모든 마커가 추가된 리스트를 리턴
         return markers;
+    }
+    // 파인애플 데이터 처리
+    public Marker processPineappleJSONObject(JSONObject jo) throws JSONException {
+
+        Marker ma = null;	// 임시객체
+
+        // 형식에 맞는지 검사. 타이틀과 위도, 경도, 고도 태그를 찾는다
+        if (jo.has("title") && jo.has("lat") && jo.has("lng") && jo.has("elevation") ) {
+
+            Log.v(MixView.TAG, "processing Pineapple JSON object");	// 로그 출력
+
+            // 할당된 값들로 마커 생성
+            ma = new POIMarker(
+                    jo.getString("title"),
+                    jo.getDouble("lat"),
+                    jo.getDouble("lng"),
+                    jo.getDouble("elevation"),
+                    "http://",		// 위키의 url 을 입력
+                    DataSource.DATASOURCE.PINEAPPLE);
+        }
+        return ma;	// 마커 리턴
     }
 
     // 위키피디아 데이터 처리

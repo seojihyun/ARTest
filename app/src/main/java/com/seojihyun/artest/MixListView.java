@@ -106,6 +106,7 @@ public class MixListView extends ListActivity {
                 dataSourceMenu.add("Buzz");
                 dataSourceMenu.add(getString(DataView.SOURCE_OPENSTREETMAP));
                 dataSourceMenu.add("Own URL");
+                dataSourceMenu.add("Pineapple");
 
                 // 메뉴 설명을 등록
                 dataSourceDescription = new Vector<String>();
@@ -114,6 +115,7 @@ public class MixListView extends ListActivity {
                 dataSourceDescription.add("");
                 dataSourceDescription.add("(OpenStreetMap)");
                 dataSourceDescription.add("example: http://mixare.org/geotest.php");
+                dataSourceDescription.add("pineapple");
 
                 // 각 항목의 체크여부를 등록
                 dataSourceChecked = new Vector<Boolean>();
@@ -122,6 +124,7 @@ public class MixListView extends ListActivity {
                 dataSourceChecked.add(mixContext.isDataSourceSelected(DataSource.DATASOURCE.BUZZ));
                 dataSourceChecked.add(mixContext.isDataSourceSelected(DataSource.DATASOURCE.OSM));
                 dataSourceChecked.add(mixContext.isDataSourceSelected(DataSource.DATASOURCE.OWNURL));
+                dataSourceChecked.add(mixContext.isDataSourceSelected(DataSource.DATASOURCE.PINEAPPLE));
 
                 // 리스트 어댑터를 생성하고 설정
                 adapter = new ListItemAdapter(this);
@@ -348,6 +351,10 @@ public class MixListView extends ListActivity {
                         });
                         alert.show();	// 다이얼로그 표시
                         break;
+                    case 5:
+                        menu.setHeaderTitle("PINEAPPLE Menu");
+                        menu.add(index, index, index, "We are working on it...");
+                        break;
                 }
             }
         });
@@ -385,6 +392,9 @@ public class MixListView extends ListActivity {
 		/*Own URL*/
             case 4:
                 mixContext.toogleDataSource(DataSource.DATASOURCE.OWNURL);
+                break;
+            case 5:
+                mixContext.toogleDataSource(DataSource.DATASOURCE.PINEAPPLE);
                 break;
         }
     }
@@ -590,6 +600,8 @@ class ListItemAdapter extends BaseAdapter {
         else if (source.equals("OpenStreetMap"))
             changeColor(3, Color.WHITE, Color.DKGRAY);
         else if (source.equals("OwnURL"))
+            changeColor(4, Color.WHITE, Color.DKGRAY);
+        else if (source.equals("Pineapple"))
             changeColor(4, Color.WHITE, Color.DKGRAY);
     }
 

@@ -20,13 +20,16 @@ public class DataSource {
 
 
     // 데이터 소스와 데이터 포맷의 열거형 변수
-    public enum DATASOURCE { WIKIPEDIA, BUZZ, TWITTER, OSM, OWNURL};
-    public enum DATAFORMAT { WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE};
+    public enum DATASOURCE { WIKIPEDIA, BUZZ, TWITTER, OSM, OWNURL, PINEAPPLE};
+    public enum DATAFORMAT { WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, PINEAPPLE};
 
     /** 기본 URL */
+    // 파인애플
+    private static final String PINEAPPLE_BASE_URL ="http://************/artest.php";
+
     // 위키피디아
     //private static final String WIKI_BASE_URL = "http://ws.geonames.org/findNearbyWikipediaJSON";
-    private static final String WIKI_BASE_URL = "http://211.58.69.16:8080/artest.php";
+    private static final String WIKI_BASE_URL = "http://****************/artest.php";
     //private static final String WIKI_BASE_URL =	"file:///sdcard/wiki.json";
 
     // 트위터
@@ -78,6 +81,7 @@ public class DataSource {
         DATAFORMAT ret;
         // 소스 형식에 따라 포맷을 할당한다
         switch (ds) {
+            case PINEAPPLE: ret=DATAFORMAT.PINEAPPLE; break;
             case WIKIPEDIA: ret=DATAFORMAT.WIKIPEDIA; break;
             case BUZZ: ret=DATAFORMAT.BUZZ; break;
             case TWITTER: ret=DATAFORMAT.TWITTER; break;
@@ -94,6 +98,10 @@ public class DataSource {
 
         // 소스에 따라 주소 할당. 우선 상수로 설정된 값들을 할당한다
         switch(source) {
+
+            case PINEAPPLE:
+                ret = PINEAPPLE_BASE_URL;
+                break;
 
             case WIKIPEDIA:
                 ret = WIKI_BASE_URL;
@@ -119,6 +127,16 @@ public class DataSource {
 
             // 각 소스에 따른 URL 리퀘스트를 완성한다
             switch(source) {
+                // 파인애플
+                case PINEAPPLE:
+                    ret+=
+                            "?lat=" + lat +
+                                    "&lng=" + lon +
+                                    "&radius=5" +
+                                    "&maxRows=50" +
+                                    "&lang=" + locale +
+                                    "&username=seojihyunn";
+                    break;
                 // 위키피디아
                 case WIKIPEDIA:
                     ret+=
@@ -144,6 +162,7 @@ public class DataSource {
             case TWITTER:	ret = Color.rgb(50, 204, 255); break;
             case OSM:		ret = Color.rgb(255, 168, 0); break;
             case WIKIPEDIA:	ret = Color.RED; break;
+            case PINEAPPLE: ret = Color.YELLOW; break;
             default:		ret = Color.WHITE; break;
         }
         return ret;
