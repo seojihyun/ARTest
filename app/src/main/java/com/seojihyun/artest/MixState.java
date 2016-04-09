@@ -38,6 +38,20 @@ public class MixState {
         return true;
     }
 
+
+    //서지현_test1 추가
+    // 이벤트 처리
+    public boolean handleEvent(MixContext ctx, String onPress, Marker marker) {
+            try {
+                // 내용을 파싱하고 디테일 뷰에 웹페이지를 띄운다
+                //String webpage = MixUtils.parseAction(onPress);
+                this.detailsView = true;
+                ctx.loadMixViewWebPage(marker); //서지현_test1
+            } catch (Exception ex) {}
+        return true;
+    }
+    //*************서지현_test1 끝
+
     // 현재의 방위각을 리턴
     public float getCurBearing() {
         return curBearing;

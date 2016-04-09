@@ -423,6 +423,44 @@ public class MixContext extends ContextWrapper {
 
         webview.loadUrl(url);	// 웹 뷰에 url 로드
     }
+    //서지현_test1 추가
+    // 웹페이지를 로드
+    public void loadMixViewWebPage(Marker marker) throws Exception {
+
+        // TODO
+        WebView webview = new WebView(mixView);	// 웹 뷰
+        webview.getSettings().setJavaScriptEnabled(true);	// 자바스크립트 허용
+
+        /*// URL 을 연결하여 웹 뷰 클라이언트를 세팅
+        webview.setWebViewClient(new WebViewClient() {
+            public boolean  shouldOverrideUrlLoading  (WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+        });
+
+        // 다이얼로그를 생성
+        Dialog d = new Dialog(mixView) {
+            public boolean onKeyDown(int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK)
+                    this.dismiss();
+                return true;
+            }
+        };
+    */
+        //서지현 추가
+        // 다이얼로그를 생성
+        UserInfoDialog d = new UserInfoDialog(mixView, marker);
+
+        d.show();	// 다이얼로그 출력
+
+ //       webview.loadUrl(url);	// 웹 뷰에 url 로드
+    }
+
+    //서지현_test1추가끝
+
+
 
     // 웹 페이지 로드. 위 메소드와의 차이는 컨텍스트를 별도로 지정한다는 것이다
     public void loadWebPage(String url, Context context) throws Exception {

@@ -301,7 +301,8 @@ abstract public class Marker implements Comparable<Marker> {
         boolean evtHandled = false;
 
         if (isClickValid(x, y)) {	// 클릭 가능한 지점인 경우(클릭된 걸로 파악된 경우)
-            evtHandled = state.handleEvent(ctx, URL);	// 마커의 URL 을 넘겨 이벤트 처리
+            //evtHandled = state.handleEvent(ctx, URL);	// 마커의 URL 을 넘겨 이벤트 처리 ***서지현_test1 삭제
+            evtHandled = state.handleEvent(ctx, URL, this);     //서지현_test1 추가
         }
         return evtHandled;	// 성공했을 경우 true 를 리턴할 것이다
     }
