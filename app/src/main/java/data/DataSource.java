@@ -25,11 +25,11 @@ public class DataSource {
 
     /** 기본 URL */
     // 파인애플
-    private static final String PINEAPPLE_BASE_URL ="http://192.168.25.7:8080/artest.php";
+    private static final String PINEAPPLE_BASE_URL ="***********/artest.php";
 
     // 위키피디아
     //private static final String WIKI_BASE_URL = "http://ws.geonames.org/findNearbyWikipediaJSON";
-    private static final String WIKI_BASE_URL = "http://192.168.25.7:8080/artest.php";
+    private static final String WIKI_BASE_URL = "****************/artest.php";
     //private static final String WIKI_BASE_URL =	"file:///sdcard/wiki.json";
 
     // 트위터
